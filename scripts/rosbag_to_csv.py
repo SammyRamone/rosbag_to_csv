@@ -67,7 +67,7 @@ def bag_to_csv(options, fname):
         for topic, msg, time in bag.read_messages(topics=options.topic_names,
                                                   start_time=stime,
                                                   end_time=etime):
-            if streamdict.has_key(topic):
+            if topic in streamdict:
                 stream = streamdict[topic]
             else:
                 stream = open(format_csv_filename(options.output_file_format, fname[fname.rfind('/'):-4]+topic),'w')
@@ -93,7 +93,7 @@ def GetTopicList(path):
     topics = bag.get_type_and_topic_info()[1].keys()
     types=[]
     for i in range(0,len(bag.get_type_and_topic_info()[1].values())):
-        types.append(bag.get_type_and_topic_info()[1].values()[i][0])
+        types.append(list(bag.get_type_and_topic_info()[1].values())[i][0])
 
     results=[]    
     for to,ty in zip(topics,types):
@@ -133,7 +133,7 @@ def main(options):
     QtGui.QMessageBox.information(QtGui.QWidget(), "Message", "Finish Convert!!")
 
 if __name__ == '__main__':
-    print "rosbag_to_csv start!!"
+    print ("rosbag_to_csv start!!")
     rospy.init_node('rosbag_to_csv', anonymous=True)
     parser = OptionParser(usage="%prog [options] bagfile")
     parser.add_option("-a", "--all", dest="all_topics",

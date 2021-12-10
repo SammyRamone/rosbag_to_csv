@@ -84,6 +84,6 @@ if __name__ == '__main__':
     #  optList=SimplePyQtGUIKit.GetCheckButtonSelect(["sample a","sample b","sample c"], title="Select sample", msg="Please select sample")
     #  print optList
     filePath=SimplePyQtGUIKit.GetFilePath(caption=u"Select files",filefilter="*py")
-    print filePath
+    print (filePath)
 
 
